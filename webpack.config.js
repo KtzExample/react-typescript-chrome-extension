@@ -4,13 +4,14 @@ var path = require('path');
 // variables
 var isProduction = process.argv.indexOf('-p') >= 0;
 var sourcePath = path.join(__dirname, './src');
-var outPath = path.join(__dirname, './dev');
+var outPath = path.join(__dirname, './dist');
 
 // plugins
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
+  devtool: "source-map",
   context: sourcePath,
   entry: {
     main: './index.tsx',
@@ -54,7 +55,7 @@ module.exports = {
           use: [
             {
               loader: 'css-loader',
-              query: {
+              options: {
                 modules: true,
                 sourceMap: !isProduction,
                 importLoaders: 1,
